@@ -20,7 +20,7 @@ public static class Startup
     {
         var serviceProvider = ConfigureServices();
 
-        var parserResult = Parser.Default.ParseArguments<FetchDbDataOptions, AddHotelOptions>(args);
+        var parserResult = Parser.Default.ParseArguments<FetchDbDataOptions, AddHotelOptions, GenerateNumberOptions>(args);
         
         await parserResult.MapResult(
             async (FetchDbDataOptions opts) =>
@@ -34,20 +34,27 @@ public static class Startup
 
                 await command.AddHotelAsync(opts.Name, opts.TypeId);
             },
+            async (GenerateNumberOptions opts) =>
+            {
+                var command = serviceProvider.GetRequiredService<GenerateNumberCommand>();
+                command.Execute();
+            },
             errs => Task.CompletedTask // Handle errors
         );
     }
 
     public static IServiceProvider ConfigureServices()
-    {
+{
         var configuration = LoadConfiguration();
 
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-        return new ServiceCollection()
-            .AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString))
-            .RegisterServices()
-            .BuildServiceProvider();
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.Configure<CustomSettingsConfiguration>(configuration.GetSection("CommonSettings"));
+        serviceCollection.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
+        serviceCollection.RegisterServices();
+
+        return serviceCollection.BuildServiceProvider();
     }
 
     private static IConfiguration LoadConfiguration()
