@@ -22,8 +22,9 @@ class GenerateNumberCommand
     public void Execute()
     {
         int maxAttemptNumber = _config.MaxAttemptNumber;
-        int number = _numberGenerator.GenerateNumber(1, 100);
-        Console.WriteLine(number);
+        int minNumber = _config.MinNumber;
+        int maxNumber = _config.MaxNumber;
+        int number = _numberGenerator.GenerateNumber(minNumber, maxNumber);
 
         while (true)
         {
