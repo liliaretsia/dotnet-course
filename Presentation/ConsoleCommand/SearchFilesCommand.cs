@@ -15,6 +15,8 @@ class SearchFilesCommand
 
     public void Execute(string path)
     {
+        List<string> filenames = new();
+        
         _fileFinder.FileFound += (sender, args) =>
         {
             Console.WriteLine($"File found: {args.FileName}");
@@ -23,11 +25,12 @@ class SearchFilesCommand
                 args.CancelRequested = true;
                 Console.WriteLine("Log file found. Cancelling further search.");
             }
+
+            filenames.Add(args.FileName); 
         };
         _fileFinder.Explore(path);
 
-        var strings = new List<string> { "Short", "VeryVeryLong", "Medium" };
-        var longestString = strings.GetMax(s => s.Length);
+        var longestString = filenames.GetMax(s => s.Length);
         Console.WriteLine($"The longest string is: {longestString}");
     }    
 }
