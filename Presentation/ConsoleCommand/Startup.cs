@@ -20,7 +20,7 @@ public static class Startup
     {
         var serviceProvider = ConfigureServices();
 
-        var parserResult = Parser.Default.ParseArguments<FetchDbDataOptions, AddHotelOptions, GenerateNumberOptions>(args);
+        var parserResult = Parser.Default.ParseArguments<FetchDbDataOptions, AddHotelOptions, CloneOptions, GenerateNumberOptions>(args);
         
         await parserResult.MapResult(
             async (FetchDbDataOptions opts) =>
@@ -37,6 +37,11 @@ public static class Startup
             async (GenerateNumberOptions opts) =>
             {
                 var command = serviceProvider.GetRequiredService<GenerateNumberCommand>();
+                command.Execute();
+            },
+            async (CloneOptions opts) =>
+            {
+                var command = serviceProvider.GetRequiredService<CloneCommand>();
                 command.Execute();
             },
             errs => Task.CompletedTask // Handle errors
