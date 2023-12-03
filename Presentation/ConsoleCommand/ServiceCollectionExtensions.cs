@@ -19,6 +19,7 @@ public static class ServiceCollectionExtensions
             .AddScoped<IAddHotelUseCase, AddHotelUseCase>()
             .AddScoped<GenerateNumberCommand>()
             .AddScoped<AddHotelCommand>()
+            .AddScoped<CloneCommand>()
             .AddScoped<FetchDbDataCommand>();
     }
 }
