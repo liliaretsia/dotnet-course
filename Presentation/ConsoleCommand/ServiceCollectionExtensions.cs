@@ -24,6 +24,7 @@ public static class ServiceCollectionExtensions
             .AddScoped<CloneCommand>()
             .AddScoped<FetchDbDataCommand>()
             .AddScoped<FetchDbDataCommand>()
+            .AddScoped<CountSpacesInFilesCommand>()
             .AddScoped<SearchFilesCommand>();
     }
 }
