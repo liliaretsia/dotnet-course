@@ -21,6 +21,8 @@ public static class ServiceCollectionExtensions
             .AddScoped<GenerateNumberCommand>()
             .AddScoped<AddHotelCommand>()
             .AddScoped<CountIntegersCommand>()
+            .AddScoped<CloneCommand>()
+            .AddScoped<FetchDbDataCommand>()
             .AddScoped<FetchDbDataCommand>()
             .AddScoped<SearchFilesCommand>();
     }
