@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
             .AddScoped<IFileFinder, FileFinder>()
             .AddScoped<GenerateNumberCommand>()
             .AddScoped<AddHotelCommand>()
+            .AddScoped<CountIntegersCommand>()
             .AddScoped<CloneCommand>()
             .AddScoped<FetchDbDataCommand>()
             .AddScoped<FetchDbDataCommand>()
