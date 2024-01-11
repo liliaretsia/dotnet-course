@@ -17,9 +17,11 @@ public static class ServiceCollectionExtensions
             .AddScoped<INumberGenerator, NumberGenerator>()
             .AddScoped<ICheckNumberUseCase, CheckNumberUseCase>()
             .AddScoped<IAddHotelUseCase, AddHotelUseCase>()
+            .AddScoped<IFileFinder, FileFinder>()
             .AddScoped<GenerateNumberCommand>()
             .AddScoped<AddHotelCommand>()
             .AddScoped<CountIntegersCommand>()
-            .AddScoped<FetchDbDataCommand>();
+            .AddScoped<FetchDbDataCommand>()
+            .AddScoped<SearchFilesCommand>();
     }
 }
