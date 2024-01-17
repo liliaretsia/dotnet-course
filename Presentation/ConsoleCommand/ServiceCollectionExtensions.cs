@@ -18,12 +18,13 @@ public static class ServiceCollectionExtensions
             .AddScoped<ICheckNumberUseCase, CheckNumberUseCase>()
             .AddScoped<IAddHotelUseCase, AddHotelUseCase>()
             .AddScoped<IFileFinder, FileFinder>()
+            .AddScoped<ISerializableService, SerializableService>()
             .AddScoped<GenerateNumberCommand>()
             .AddScoped<AddHotelCommand>()
             .AddScoped<CountIntegersCommand>()
             .AddScoped<CloneCommand>()
             .AddScoped<FetchDbDataCommand>()
-            .AddScoped<FetchDbDataCommand>()
+            .AddScoped<SerializeCommand>()
             .AddScoped<CountSpacesInFilesCommand>()
             .AddScoped<SearchFilesCommand>();
     }

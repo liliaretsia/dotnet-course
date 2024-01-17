@@ -27,6 +27,7 @@ public static class Startup
             CloneOptions,
             GenerateNumberOptions,
             CountSpacesOptions,
+            SerializeOptions,
             SearchFilesOptions
         >(args);
         
@@ -68,6 +69,12 @@ public static class Startup
                 var command = serviceProvider.GetRequiredService<CountSpacesInFilesCommand>();
 
                 await command.Execute(opts.Path);
+            },
+            async (SerializeOptions opts) =>
+            {
+                var command = serviceProvider.GetRequiredService<SerializeCommand>();
+
+                command.Execute();
             },
             errs => Task.CompletedTask // Handle errors
         );
